@@ -1,40 +1,47 @@
 extends CharacterBody2D
 
 var grid_size = 128
-var position_x = 2
-var position_y = 2
 var can_move = true
+var movement = Vector2.ZERO
 
 func _ready():
-	position = Vector2(position_x * grid_size, position_y * grid_size)
+	position = position.snapped(Vector2(grid_size, grid_size)) # Alinha o personagem ao grid ao iniciar
 
-func _process(_delta):
+func _process(delta):
 	if can_move:
-		var direction = Vector2.ZERO
-		if Input.is_action_pressed ("move_right"):
-			position_x += 1
+		if Input.is_action_just_pressed("move_right"):
+			movement = Vector2(1, 0)
 			can_move = false
-		if Input.is_action_pressed ("move_left"):
-			position_x -= 1
+		elif Input.is_action_just_pressed("move_left"):
+			movement = Vector2(-1, 0)
 			can_move = false
-		if Input.is_action_pressed ("move_down"):
-			position_y += 1
+		elif Input.is_action_just_pressed("move_down"):
+			movement = Vector2(0, 1)
 			can_move = false
-		if Input.is_action_pressed ("move_up"):
-			position_y -= 1
+		elif Input.is_action_just_pressed("move_up"):
+			movement = Vector2(0, -1)
 			can_move = false
-		
-		if direction != Vector2.ZERO:
-			direction = direction.normalized()
-			var collision = move_and_collide(direction * grid_size)
 			
-			if collision == null:
-				position += direction * grid_size
-				position_x = int(position_x / grid_size)
-				position_y = int(position_y / grid_size)
+		if not can_move:
+			move_one_tile()
 
-	if not Input.is_action_pressed("move_right") and \
-		not Input.is_action_pressed("move_left") and \
-		not Input.is_action_pressed("move_down") and \
-		not Input.is_action_pressed("move_up"):
-			can_move = true
+func move_one_tile():
+	var target_position = position + (movement * grid_size)
+	
+	# Verifica colisão antes de mover
+	if not is_colliding(target_position):
+		position = target_position.snapped(Vector2(grid_size, grid_size)) # Move e alinha ao grid
+	else:
+		print("Movimento bloqueado!")
+		
+	movement = Vector2.ZERO
+	can_move = true
+
+func is_colliding(target_position):
+	# Usamos move_and_collide para prever colisões sem alterar a posição real
+	var collision = move_and_collide(target_position - position)
+	return collision != null
+
+#Anotação: Para evitar que o personagem ficasse travando nas colisões do cenario, a sua colisão do
+#nodulo CollisionShape2D foi reduzida de 128x128 para 127,5x127,5
+#Me sinto orgulhoso por ter pensado nisso sozinho
