@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwg2omeamlwf7"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_tlkfl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kvo0"]
+bg_color = Color(0.160784, 0.309804, 0.247059, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0.196078, 0.14902, 1)
+border_blend = true
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tlkfl")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kvo0")
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -79.0
+offset_top = -132.0
+offset_right = 79.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Apocalipse Biológico"
+
+[node name="NovoJogo" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.462674
+anchor_top = 0.375
+anchor_right = 0.538194
+anchor_bottom = 0.422839
+grow_horizontal = 2
+grow_vertical = 2
+text = "Novo Jogo"
+metadata/_edit_use_anchors_ = true
+
+[node name="CarregarJogo" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -26.0
+offset_right = 38.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Carregar"
+
+[node name="Sair" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = 43.0
+offset_right = 19.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sair"
+
+[connection signal="pressed" from="NovoJogo" to="." method="_on_novo_jogo_pressed"]
+[connection signal="pressed" from="Sair" to="." method="_on_sair_pressed"]
