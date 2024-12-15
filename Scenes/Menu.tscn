@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cwg2omeamlwf7"]
 
-[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_tlkfl"]
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="1_d0fve"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kvo0"]
 bg_color = Color(0.160784, 0.309804, 0.247059, 1)
@@ -18,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_tlkfl")
+script = ExtResource("1_d0fve")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -44,7 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Apocalipse Biológico"
 
-[node name="NovoJogo" type="Button" parent="."]
+[node name="Novo" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.462674
@@ -56,7 +56,7 @@ grow_vertical = 2
 text = "Novo Jogo"
 metadata/_edit_use_anchors_ = true
 
-[node name="CarregarJogo" type="Button" parent="."]
+[node name="Carregar" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -86,5 +86,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Sair"
 
-[connection signal="pressed" from="NovoJogo" to="." method="_on_novo_jogo_pressed"]
+[connection signal="pressed" from="Novo" to="." method="_on_novo_jogo_pressed"]
 [connection signal="pressed" from="Sair" to="." method="_on_sair_pressed"]
